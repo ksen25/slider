@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Задание 2</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <section id="navigation">
+    <img src="img/menu.png" alt="Навигация">
+  </section>
+  <section class="title">
+      <h1>Слайдер</h1>
+  </section>
+  <div class="swiper mySwiper">     
+    <div class="swiper-wrapper">
+      <div class="swiper-slide slide1 slide"><img src="img/slide1.png" alt="слайд 1"></div>
+      <div class="swiper-slide slide"><img src="img/slide2.png" alt="слайд 2"></div>
+      <div class="swiper-slide slide"><img src="img/slide3.png" alt="слайд 3"></div>
+      <div class="swiper-slide slide"><img src="img/slide4.png" alt="слайд 4"></div>
+    </div>
+    <div>
+      <div class="swiper-button-next"><img src="img/next.svg" alt="next"></div>
+      <div class="swiper-pagination"></div>    
+      <div class="swiper-button-prev"><img src="img/prev.svg" alt="back"></div>
+    </div>
+  </div>
+  <button class="continue buttons" disabled>Продолжить</button>
+    <footer>
+        <img src="img/footer.png" alt="Подвал">
+    </footer>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const button = document.querySelector('.continue');
+    let swiper = new Swiper(".mySwiper", {
+      navigation: { 
+        nextEl: ".swiper-button-next", 
+        prevEl: ".swiper-button-prev", 
+      }, 
+      pagination: { 
+        el: ".swiper-pagination", 
+        clickable: true,
+      },
+      on: {
+        slideChangeTransitionEnd: function () {
+          markSlideAsViewed();
+          checkSlidesViewed();
+        }
+      }
+    });
+    function markSlideAsViewed() {
+      let activeSlide = document.querySelector('.swiper-slide-active');
+      if (activeSlide) {
+        activeSlide.classList.add('viewed');
+      }
+    }
+    function checkSlidesViewed() { 
+      const viewedSlides = document.querySelectorAll('.slide.viewed'); 
+      if (viewedSlides.length === slides.length) { 
+        button.disabled = false; 
+      } else { 
+        button.disabled = true; 
+      } 
+    }
+    markSlideAsViewed();
+  </script>
+</body>
+</html>
